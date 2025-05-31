@@ -1,0 +1,104 @@
+sequenceDiagram
+    participant User
+    participant App
+    participant IdentityManager
+    participant ColorScheme
+    participant ContentRepository
+    participant APIGateway
+    participant ExternalAPIs
+    participant AIAgents
+    participant DatabaseService
+    participant AnalyticsService
+    participant ConsentManager
+    
+    User->>App: Access website
+    App->>AnalyticsService: trackPageView(page, user)
+    App->>ContentRepository: loadInitialContent()
+    ContentRepository->>App: return content for both identities
+    App->>IdentityManager: initialize()
+    IdentityManager->>ColorScheme: setContextualColors("neutral")
+    ColorScheme-->>IdentityManager: return neutral color palette
+    App->>User: display split-screen hero section
+    
+    User->>App: Hover over corporate identity
+    App->>IdentityManager: setIdentity("corporate")
+    IdentityManager->>ColorScheme: transitionTo("corporate")
+    ColorScheme-->>App: update with corporate colors
+    App->>User: animate corporate side expansion
+    
+    User->>App: Click "corporate identity"
+    App->>IdentityManager: setIdentity("corporate")
+    IdentityManager->>ColorScheme: setContextualColors("corporate")
+    App->>ContentRepository: getContentByIdentity("corporate")
+    ContentRepository-->>App: return corporate content
+    App->>DatabaseService: logUserPreference(user, "corporate")
+    App->>AIAgents: notify("corporate view", user)
+    AIAgents->>BrandHarmonizerAgent: checkTypographyConsistency(content)
+    BrandHarmonizerAgent-->>App: return consistency report
+    AIAgents->>SEOSyncerAgent: activateKeywordStrategy("corporate")
+    App->>User: display corporate-focused interface
+    
+    User->>App: Click "Leadership Timeline"
+    App->>ContentRepository: getTimelineEvents()
+    ContentRepository-->>App: return timeline data
+    App->>AIAgents: enhanceContent(timeline)
+    AIAgents-->>App: return enhanced timeline
+    App->>AnalyticsService: trackSectionView("timeline", user)
+    App->>User: display leadership timeline
+    
+    User->>App: Fill consulting request form
+    App->>ConsentManager: obtainConsent(user, ["contact", "marketing"])
+    ConsentManager->>User: display consent options
+    User->>ConsentManager: grantConsent(["contact"])
+    ConsentManager-->>App: return consent confirmation
+    App->>DatabaseService: saveLead(leadData)
+    DatabaseService->>CorporateDatabase: insert lead
+    CorporateDatabase-->>App: confirm save
+    App->>AnalyticsService: trackConversion("lead", user)
+    App->>User: display confirmation
+    
+    User->>App: Click "DJ identity"
+    App->>IdentityManager: setIdentity("artistic")
+    IdentityManager->>ColorScheme: setContextualColors("artistic")
+    App->>ContentRepository: getContentByIdentity("artistic")
+    ContentRepository-->>App: return artistic content
+    App->>APIGateway: getSoundCloudTracks()
+    APIGateway->>SoundCloudIntegration: getTracks()
+    SoundCloudIntegration->>ExternalAPIs: API call to SoundCloud
+    ExternalAPIs-->>SoundCloudIntegration: return tracks data
+    SoundCloudIntegration-->>APIGateway: processed tracks
+    APIGateway-->>App: return tracks for display
+    
+    App->>APIGateway: getUpcomingEvents()
+    APIGateway->>ResidentAdvisorIntegration: getEvents()
+    ResidentAdvisorIntegration->>ExternalAPIs: API call to Resident Advisor
+    ExternalAPIs-->>ResidentAdvisorIntegration: return events data
+    ResidentAdvisorIntegration-->>APIGateway: processed events
+    APIGateway-->>App: return events for display
+    
+    App->>AIAgents: notify("artistic view", user)
+    AIAgents->>PerformanceMonitorAgent: optimizeMediaLoading()
+    App->>User: display artistic-focused interface
+    
+    User->>App: Submit booking request
+    App->>ConsentManager: obtainConsent(user, ["booking", "communication"])
+    ConsentManager->>User: display consent options
+    User->>ConsentManager: grantConsent(["booking", "communication"])
+    App->>DatabaseService: saveBooking(bookingData)
+    DatabaseService->>ArtisticDatabase: insert booking
+    ArtisticDatabase-->>App: confirm save
+    App->>AnalyticsService: trackConversion("booking", user)
+    App->>User: display confirmation
+    
+    User->>App: Navigate to Case Studies
+    App->>ContentRepository: getCaseStudies()
+    ContentRepository-->>App: return case study data
+    App->>IdentityManager: setIdentity("hybrid")
+    IdentityManager->>ColorScheme: setContextualColors("hybrid")
+    App->>User: display case studies with hybrid design
+    
+    User->>App: Close session
+    App->>AnalyticsService: finalizeSession(user)
+    AnalyticsService->>AnalyticsService: compareIdentityMetrics()
+    AnalyticsService->>AIAgents: provideEngagementData(metrics)
+    AIAgents->>AIAgents: updateRecommendationModels()

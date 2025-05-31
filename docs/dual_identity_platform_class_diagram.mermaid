@@ -1,0 +1,186 @@
+classDiagram
+    class User {
+        +string id
+        +string email
+        +string[] preferences
+        +boolean consentGiven
+        +Date consentTimestamp
+        +getPreferredIdentity() string
+        +updateConsent(boolean consent) void
+        +updatePreferences(string[] prefs) void
+    }
+    
+    class IdentityManager {
+        +string activeIdentity
+        +toggleIdentity() void
+        +setIdentity(string identity) void
+        +getActiveIdentity() string
+        +getColorScheme() ColorScheme
+    }
+    
+    class ColorScheme {
+        +string[] corporatePalette
+        +string[] artisticPalette
+        +object currentPalette
+        +setContextualColors(string identity) void
+        +getColor(string colorName) string
+        +transitionTo(string identity) void
+    }
+    
+    class ContentRepository {
+        +getContentByIdentity(string identity) Content[]
+        +getCaseStudies() CaseStudy[]
+        +getTimelineEvents() Event[]
+        +getTestimonials() Testimonial[]
+    }
+    
+    class Content {
+        +string id
+        +string title
+        +string description
+        +string identity
+        +string[] tags
+        +Date createdAt
+        +Date updatedAt
+        +getMediaAssets() MediaAsset[]
+    }
+    
+    class CorporateContent {
+        +string position
+        +string company
+        +string[] expertise
+        +getConsultancyServices() Service[]
+        +getLeadershipEvents() Event[]
+    }
+    
+    class ArtisticContent {
+        +string djName
+        +string[] genres
+        +string[] venues
+        +getUpcomingEvents() Event[]
+        +getTracks() Track[]
+        +getMixes() Mix[]
+    }
+    
+    class CaseStudy {
+        +string id
+        +string title
+        +string description
+        +string[] tags
+        +object metrics
+        +string[] identities
+        +getRelatedContent() Content[]
+    }
+    
+    class AIAgent {
+        +string id
+        +string type
+        +object configuration
+        +process(object data) object
+        +train(object data) void
+        +evaluate() object
+    }
+    
+    class BrandHarmonizerAgent {
+        +checkTypographyConsistency(string content) object
+        +suggestVisualAdjustments(object content) object
+        +monitorBrandConsistency() Report
+    }
+    
+    class SEOSyncerAgent {
+        +generateKeywordStrategy(string identity) string[]
+        +analyzeContentSEO(Content content) Report
+        +generateSchemaMarkup(Content content) string
+    }
+    
+    class PerformanceMonitorAgent {
+        +monitorLoadTimes() Metrics
+        +optimizeImages(MediaAsset[] assets) MediaAsset[]
+        +suggestCDNOptimizations() Suggestions
+    }
+    
+    class APIGateway {
+        +integrateExternalAPI(string service) Promise
+        +cacheResponse(string key, object data) void
+        +handleError(Error error) Response
+    }
+    
+    class SoundCloudIntegration {
+        +getTracks() Track[]
+        +getPlaylists() Playlist[]
+        +embedPlayer(string trackId) HTMLElement
+    }
+    
+    class ResidentAdvisorIntegration {
+        +getEvents() Event[]
+        +getVenueInfo(string venueId) Venue
+        +syncCalendar() boolean
+    }
+    
+    class CalendlyIntegration {
+        +getAvailability() TimeSlot[]
+        +bookAppointment(string timeSlot, User user) Appointment
+        +cancelAppointment(string appointmentId) boolean
+    }
+    
+    class BeatportIntegration {
+        +getReleases() Track[]
+        +getChartPosition(string trackId) number
+        +purchaseLink(string trackId) URL
+    }
+    
+    class DatabaseService {
+        +connect() void
+        +disconnect() void
+        +query(object filter) Promise
+        +insert(object data) Promise
+        +update(string id, object data) Promise
+        +delete(string id) Promise
+    }
+    
+    class CorporateDatabase {
+        +getLeads() Lead[]
+        +getConsultancyRequests() Request[]
+        +getCourseEnrollments() Enrollment[]
+        +saveLead(Lead lead) string
+    }
+    
+    class ArtisticDatabase {
+        +getBookings() Booking[]
+        +getFeedback() Feedback[]
+        +getTrackAnalytics() Analytics
+        +saveBookingRequest(Booking booking) string
+    }
+    
+    class ConsentManager {
+        +obtainConsent(User user, string[] purposes) Consent
+        +verifyConsent(User user, string purpose) boolean
+        +revokeConsent(User user, string purpose) void
+        +exportUserData(string userId) UserData
+        +deleteUserData(string userId) boolean
+    }
+    
+    class AnalyticsService {
+        +trackPageView(string page, User user) void
+        +trackConversion(string goal, User user) void
+        +generateReport(string reportType) Report
+        +compareIdentityMetrics() Comparison
+    }
+    
+    Content <|-- CorporateContent
+    Content <|-- ArtisticContent
+    AIAgent <|-- BrandHarmonizerAgent
+    AIAgent <|-- SEOSyncerAgent
+    AIAgent <|-- PerformanceMonitorAgent
+    APIGateway -- SoundCloudIntegration
+    APIGateway -- ResidentAdvisorIntegration
+    APIGateway -- CalendlyIntegration
+    APIGateway -- BeatportIntegration
+    DatabaseService <|-- CorporateDatabase
+    DatabaseService <|-- ArtisticDatabase
+    IdentityManager -- ColorScheme
+    ContentRepository -- Content
+    ContentRepository -- CaseStudy
+    User -- IdentityManager
+    User -- ConsentManager
+    AnalyticsService -- User

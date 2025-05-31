@@ -1,0 +1,595 @@
+{
+  "system_name": "Dual-Identity Platform",
+  "version": "1.0",
+  "created_date": "2025-05-30",
+  "architecture": {
+    "frontend": {
+      "framework": "React with Next.js",
+      "styling": "Tailwind CSS",
+      "animation": "Framer Motion",
+      "key_components": {
+        "HeroSection": {
+          "description": "Split-screen component with dynamic transitions between identities",
+          "features": [
+            "Left panel for corporate identity",
+            "Right panel for artistic identity",
+            "Interactive hover animations for identity toggling",
+            "Responsive design for mobile adaptation"
+          ],
+          "properties": {
+            "activeIdentity": "string",
+            "hoverState": "string",
+            "expansionRatio": "number"
+          },
+          "methods": {
+            "transitionToIdentity": "(identity: string) => void",
+            "handleHover": "(identity: string) => void",
+            "handleClick": "(identity: string) => void"
+          }
+        },
+        "ColorSchemeProvider": {
+          "description": "Context provider for adaptive color scheme management",
+          "color_palettes": {
+            "corporate": {
+              "primary": "#1A365D",
+              "secondary": "#4A5568",
+              "accent": "#718096"
+            },
+            "artistic": {
+              "primary": "#3A1042",
+              "secondary": "#6B46C1",
+              "accent": "#00FFFF"
+            },
+            "hybrid": {
+              "primary": "#2C3E50",
+              "secondary": "#553C9A",
+              "accent": "#FFD700"
+            }
+          },
+          "methods": {
+            "setContextualColors": "(identity: string) => void",
+            "transitionTo": "(identity: string) => void",
+            "getColor": "(colorName: string) => string"
+          }
+        },
+        "CorporateSection": {
+          "description": "Components for corporate identity presentation",
+          "subcomponents": [
+            "LeadershipTimeline",
+            "ConsultancyPortal",
+            "TestimonialGallery"
+          ]
+        },
+        "ArtisticSection": {
+          "description": "Components for DJ identity presentation",
+          "subcomponents": [
+            "SoundCloudPlayer",
+            "EventCalendar",
+            "ProductionPortfolio"
+          ]
+        },
+        "AstonSchoolSection": {
+          "description": "Components for educational institution content",
+          "subcomponents": [
+            "CourseDashboard",
+            "StudentPortal",
+            "PlacementTest"
+          ]
+        },
+        "CaseStudyLibrary": {
+          "description": "Components for hybrid identity case studies",
+          "subcomponents": [
+            "CaseStudyCard",
+            "DataVisualization",
+            "ProjectGallery"
+          ]
+        }
+      }
+    },
+    "backend": {
+      "services": {
+        "IdentityManagerService": {
+          "description": "Manages the active identity state and transitions",
+          "endpoints": [
+            "/api/identity/active",
+            "/api/identity/toggle",
+            "/api/identity/preference"
+          ],
+          "methods": {
+            "getActiveIdentity": "() => string",
+            "setIdentity": "(identity: string) => void",
+            "toggleIdentity": "() => void",
+            "getUserPreference": "(userId: string) => string"
+          }
+        },
+        "ContentService": {
+          "description": "Manages content retrieval from CMS",
+          "cms": "Contentful",
+          "content_types": [
+            "corporateProfile",
+            "artisticProfile",
+            "timelineEvent",
+            "caseStudy",
+            "testimonial",
+            "course",
+            "track",
+            "event"
+          ],
+          "endpoints": [
+            "/api/content/:identity",
+            "/api/content/cases",
+            "/api/content/timeline",
+            "/api/content/testimonials"
+          ]
+        },
+        "AIService": {
+          "description": "Orchestrates AI agent operations",
+          "endpoints": [
+            "/api/ai/brand-check",
+            "/api/ai/seo-keywords",
+            "/api/ai/performance-optimize",
+            "/api/ai/content-recommend"
+          ]
+        },
+        "APIGatewayService": {
+          "description": "Central gateway for external API interactions",
+          "features": [
+            "Rate limiting",
+            "Response caching",
+            "Error handling",
+            "Authentication"
+          ],
+          "endpoints": [
+            "/api/external/:service",
+            "/api/external/soundcloud",
+            "/api/external/resident-advisor",
+            "/api/external/calendly",
+            "/api/external/beatport"
+          ]
+        },
+        "ConsentManagementService": {
+          "description": "Handles GDPR consent operations",
+          "endpoints": [
+            "/api/consent/obtain",
+            "/api/consent/verify",
+            "/api/consent/revoke",
+            "/api/consent/export-data",
+            "/api/consent/delete-data"
+          ]
+        },
+        "AnalyticsService": {
+          "description": "Tracks user interactions and conversions",
+          "endpoints": [
+            "/api/analytics/track",
+            "/api/analytics/convert",
+            "/api/analytics/report",
+            "/api/analytics/compare"
+          ]
+        }
+      },
+      "ai_agents": {
+        "BrandHarmonizerAgent": {
+          "description": "Ensures consistent typography and visual elements across sections",
+          "capabilities": [
+            "Typography consistency checking",
+            "Visual adjustment suggestions",
+            "Brand consistency monitoring"
+          ],
+          "models": [
+            "Custom TensorFlow.js for visual analysis",
+            "OpenAI API for text style consistency"
+          ],
+          "api_endpoints": [
+            "/api/ai/brand/check-typography",
+            "/api/ai/brand/suggest-adjustments",
+            "/api/ai/brand/monitor-consistency"
+          ]
+        },
+        "SEOSyncerAgent": {
+          "description": "Generates dual keyword strategies for corporate and artistic content",
+          "capabilities": [
+            "Keyword strategy generation",
+            "Content SEO analysis",
+            "Schema markup generation"
+          ],
+          "models": [
+            "Custom NLP model for keyword extraction",
+            "OpenAI API for content optimization"
+          ],
+          "api_endpoints": [
+            "/api/ai/seo/generate-keywords",
+            "/api/ai/seo/analyze-content",
+            "/api/ai/seo/generate-schema"
+          ]
+        },
+        "PerformanceMonitorAgent": {
+          "description": "Optimizes resource loading and application performance",
+          "capabilities": [
+            "Load time monitoring",
+            "Image optimization",
+            "CDN optimization suggestions"
+          ],
+          "models": [
+            "TensorFlow.js for image compression",
+            "Custom analytics model for performance prediction"
+          ],
+          "api_endpoints": [
+            "/api/ai/performance/monitor-load",
+            "/api/ai/performance/optimize-images",
+            "/api/ai/performance/suggest-cdn"
+          ]
+        },
+        "ContentRecommendationAgent": {
+          "description": "Personalizes content based on user behavior",
+          "capabilities": [
+            "Cross-identity content recommendations",
+            "Personalized journey mapping",
+            "Engagement prediction"
+          ],
+          "models": [
+            "Collaborative filtering model",
+            "OpenAI API for content similarity analysis"
+          ],
+          "api_endpoints": [
+            "/api/ai/recommend/personalize",
+            "/api/ai/recommend/similar-content",
+            "/api/ai/recommend/predict-engagement"
+          ]
+        }
+      }
+    },
+    "api_integrations": {
+      "SoundCloudIntegration": {
+        "description": "Integration with SoundCloud for music tracks and playlists",
+        "endpoints": [
+          "/api/soundcloud/tracks",
+          "/api/soundcloud/playlists",
+          "/api/soundcloud/embed"
+        ],
+        "methods": [
+          "getTracks",
+          "getPlaylists",
+          "embedPlayer"
+        ],
+        "authentication": "OAuth 2.0",
+        "caching_strategy": "1 hour TTL for track data"
+      },
+      "ResidentAdvisorIntegration": {
+        "description": "Integration with Resident Advisor for event information",
+        "endpoints": [
+          "/api/resident-advisor/events",
+          "/api/resident-advisor/venues",
+          "/api/resident-advisor/sync-calendar"
+        ],
+        "methods": [
+          "getEvents",
+          "getVenueInfo",
+          "syncCalendar"
+        ],
+        "authentication": "API Key",
+        "caching_strategy": "6 hours TTL for event data"
+      },
+      "CalendlyIntegration": {
+        "description": "Integration with Calendly for appointment scheduling",
+        "endpoints": [
+          "/api/calendly/availability",
+          "/api/calendly/book",
+          "/api/calendly/cancel"
+        ],
+        "methods": [
+          "getAvailability",
+          "bookAppointment",
+          "cancelAppointment"
+        ],
+        "authentication": "OAuth 2.0",
+        "webhook_events": [
+          "appointment.created",
+          "appointment.canceled"
+        ]
+      },
+      "BeatportIntegration": {
+        "description": "Integration with Beatport for music releases and charts",
+        "endpoints": [
+          "/api/beatport/releases",
+          "/api/beatport/chart-position",
+          "/api/beatport/purchase-link"
+        ],
+        "methods": [
+          "getReleases",
+          "getChartPosition",
+          "purchaseLink"
+        ],
+        "authentication": "API Key",
+        "caching_strategy": "12 hours TTL for release data"
+      }
+    },
+    "database": {
+      "type": "MongoDB",
+      "segmented_databases": {
+        "corporate": {
+          "collections": {
+            "leads": {
+              "fields": [
+                {"name": "id", "type": "ObjectId"},
+                {"name": "firstName", "type": "String"},
+                {"name": "lastName", "type": "String"},
+                {"name": "email", "type": "String"},
+                {"name": "company", "type": "String"},
+                {"name": "position", "type": "String"},
+                {"name": "message", "type": "String"},
+                {"name": "createdAt", "type": "Date"},
+                {"name": "source", "type": "String"},
+                {"name": "status", "type": "String"},
+                {"name": "consentGiven", "type": "Boolean"},
+                {"name": "consentScope", "type": "Array"}
+              ],
+              "indexes": ["email", "createdAt"]
+            },
+            "consultancyRequests": {
+              "fields": [
+                {"name": "id", "type": "ObjectId"},
+                {"name": "leadId", "type": "ObjectId"},
+                {"name": "serviceType", "type": "String"},
+                {"name": "budget", "type": "Number"},
+                {"name": "timeline", "type": "String"},
+                {"name": "requestDetails", "type": "String"},
+                {"name": "createdAt", "type": "Date"},
+                {"name": "status", "type": "String"}
+              ],
+              "indexes": ["leadId", "createdAt"]
+            },
+            "courseEnrollments": {
+              "fields": [
+                {"name": "id", "type": "ObjectId"},
+                {"name": "studentName", "type": "String"},
+                {"name": "studentEmail", "type": "String"},
+                {"name": "courseId", "type": "String"},
+                {"name": "courseName", "type": "String"},
+                {"name": "enrollmentDate", "type": "Date"},
+                {"name": "paymentStatus", "type": "String"},
+                {"name": "consentGiven", "type": "Boolean"},
+                {"name": "consentScope", "type": "Array"}
+              ],
+              "indexes": ["studentEmail", "courseId", "enrollmentDate"]
+            }
+          },
+          "encryption": {
+            "fields": ["email", "firstName", "lastName", "message", "requestDetails"],
+            "method": "AES-256"
+          }
+        },
+        "artistic": {
+          "collections": {
+            "bookings": {
+              "fields": [
+                {"name": "id", "type": "ObjectId"},
+                {"name": "venueName", "type": "String"},
+                {"name": "contactName", "type": "String"},
+                {"name": "contactEmail", "type": "String"},
+                {"name": "eventDate", "type": "Date"},
+                {"name": "eventDuration", "type": "Number"},
+                {"name": "eventType", "type": "String"},
+                {"name": "fee", "type": "Number"},
+                {"name": "requirements", "type": "String"},
+                {"name": "createdAt", "type": "Date"},
+                {"name": "status", "type": "String"},
+                {"name": "consentGiven", "type": "Boolean"},
+                {"name": "consentScope", "type": "Array"}
+              ],
+              "indexes": ["contactEmail", "eventDate", "createdAt"]
+            },
+            "feedback": {
+              "fields": [
+                {"name": "id", "type": "ObjectId"},
+                {"name": "trackId", "type": "String"},
+                {"name": "name", "type": "String"},
+                {"name": "email", "type": "String"},
+                {"name": "comment", "type": "String"},
+                {"name": "rating", "type": "Number"},
+                {"name": "createdAt", "type": "Date"},
+                {"name": "consentGiven", "type": "Boolean"}
+              ],
+              "indexes": ["trackId", "rating", "createdAt"]
+            },
+            "trackAnalytics": {
+              "fields": [
+                {"name": "id", "type": "ObjectId"},
+                {"name": "trackId", "type": "String"},
+                {"name": "platformId", "type": "String"},
+                {"name": "plays", "type": "Number"},
+                {"name": "likes", "type": "Number"},
+                {"name": "shares", "type": "Number"},
+                {"name": "comments", "type": "Number"},
+                {"name": "date", "type": "Date"}
+              ],
+              "indexes": ["trackId", "date"]
+            }
+          },
+          "encryption": {
+            "fields": ["contactEmail", "contactName", "email", "name", "comment"],
+            "method": "AES-256"
+          }
+        },
+        "shared": {
+          "collections": {
+            "users": {
+              "fields": [
+                {"name": "id", "type": "ObjectId"},
+                {"name": "email", "type": "String"},
+                {"name": "preferredIdentity", "type": "String"},
+                {"name": "lastVisit", "type": "Date"},
+                {"name": "consentPreferences", "type": "Object"},
+                {"name": "consentTimestamp", "type": "Date"}
+              ],
+              "indexes": ["email", "lastVisit"]
+            },
+            "consents": {
+              "fields": [
+                {"name": "id", "type": "ObjectId"},
+                {"name": "userId", "type": "ObjectId"},
+                {"name": "email", "type": "String"},
+                {"name": "purposes", "type": "Array"},
+                {"name": "granted", "type": "Boolean"},
+                {"name": "timestamp", "type": "Date"},
+                {"name": "source", "type": "String"},
+                {"name": "ipAddress", "type": "String"},
+                {"name": "userAgent", "type": "String"}
+              ],
+              "indexes": ["userId", "email", "timestamp"]
+            },
+            "analytics": {
+              "fields": [
+                {"name": "id", "type": "ObjectId"},
+                {"name": "userId", "type": "String"},
+                {"name": "sessionId", "type": "String"},
+                {"name": "event", "type": "String"},
+                {"name": "identity", "type": "String"},
+                {"name": "section", "type": "String"},
+                {"name": "timestamp", "type": "Date"},
+                {"name": "metadata", "type": "Object"}
+              ],
+              "indexes": ["userId", "event", "identity", "timestamp"]
+            }
+          },
+          "encryption": {
+            "fields": ["email", "ipAddress", "userAgent"],
+            "method": "AES-256"
+          }
+        }
+      }
+    },
+    "gdpr_compliance": {
+      "consent_management": {
+        "consent_types": [
+          {"id": "contact", "description": "Contact for business inquiries"},
+          {"id": "marketing", "description": "Receive marketing communications"},
+          {"id": "booking", "description": "Contact for DJ booking inquiries"},
+          {"id": "communication", "description": "General communications"}
+        ],
+        "consent_collection_points": [
+          "Corporate contact form",
+          "DJ booking form",
+          "Course enrollment form",
+          "Track feedback form"
+        ],
+        "consent_storage": {
+          "location": "consents collection in shared database",
+          "retention_period": "3 years or until consent revocation"
+        },
+        "data_subject_rights": {
+          "access": "/api/consent/export-data",
+          "erasure": "/api/consent/delete-data",
+          "portability": "/api/consent/export-data",
+          "processing_restriction": "/api/consent/update-preferences"
+        }
+      },
+      "data_processing": {
+        "purposes": [
+          "Business communication",
+          "Marketing",
+          "Booking management",
+          "Event scheduling",
+          "User preference storage",
+          "Analytics and performance improvement"
+        ],
+        "legal_bases": [
+          "Explicit consent",
+          "Contract fulfillment",
+          "Legitimate interest"
+        ],
+        "data_minimization": {
+          "principles": [
+            "Collect only necessary data",
+            "Store data only for required duration",
+            "Limit access to personal data"
+          ],
+          "implementation": {
+            "database": "Segmented databases with field-level encryption",
+            "logging": "Limited PII in logs with automatic rotation",
+            "analytics": "Data anonymization for long-term storage"
+          }
+        }
+      },
+      "data_protection": {
+        "encryption": {
+          "methods": [
+            "AES-256 for stored data",
+            "TLS 1.3 for data in transit"
+          ],
+          "key_management": "AWS KMS for encryption key management"
+        },
+        "access_controls": {
+          "principles": ["Least privilege", "Role-based access"],
+          "implementation": "Auth0 for identity management with fine-grained permissions"
+        },
+        "breach_response": {
+          "detection": "Automated monitoring for unusual data access patterns",
+          "notification_process": "Automated alerts and manual review process",
+          "timeline": "Within 72 hours of detection"
+        }
+      }
+    },
+    "deployment": {
+      "hosting": "AWS",
+      "regions": ["eu-west-1", "us-east-1"],
+      "cdn": "CloudFront for global content delivery",
+      "containers": "Docker with Kubernetes orchestration",
+      "ci_cd": "GitHub Actions for automated testing and deployment",
+      "monitoring": {
+        "services": [
+          "Datadog for application performance",
+          "Sentry for error tracking",
+          "CloudWatch for infrastructure monitoring"
+        ],
+        "alerts": [
+          "Performance degradation",
+          "Error rate thresholds",
+          "API integration failures",
+          "Security events"
+        ]
+      }
+    }
+  },
+  "implementation_phases": {
+    "phase1": {
+      "name": "Foundation",
+      "duration": "2 months",
+      "deliverables": [
+        "Core frontend components including split-screen hero section",
+        "Basic identity management system",
+        "Initial content structure in CMS",
+        "Database schema implementation"
+      ]
+    },
+    "phase2": {
+      "name": "Core Functionality",
+      "duration": "2 months",
+      "deliverables": [
+        "Interactive transitions between identity sections",
+        "SoundCloud and Calendly integrations",
+        "GDPR-compliant contact forms",
+        "Basic analytics implementation"
+      ]
+    },
+    "phase3": {
+      "name": "Advanced Features",
+      "duration": "2 months",
+      "deliverables": [
+        "AI agent system implementation",
+        "Resident Advisor and Beatport integrations",
+        "Enhanced analytics with dual conversion tracking",
+        "Case study library with data visualization"
+      ]
+    },
+    "phase4": {
+      "name": "Optimization",
+      "duration": "1 month",
+      "deliverables": [
+        "Performance optimization across all components",
+        "A/B testing implementation",
+        "Content personalization",
+        "Comprehensive security and compliance review"
+      ]
+    }
+  }
+}
