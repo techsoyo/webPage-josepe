@@ -1,0 +1,10 @@
+{
+  "name": "josemiguelserrajosepe-web-page",
+  "version": "1.0.0",
+  "description": "Página web de JoseMiguelSerraJosepe",
+  "scripts": {
+    "dev": "cd react_template && npm run dev",
+    "build": "cd react_template && npm run build",
+    "preview": "cd react_template && npm run preview"
+  }
+}
