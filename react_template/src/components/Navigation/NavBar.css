@@ -1,0 +1,187 @@
+/* Estilos para el Navbar inspirado en Super Evil Genius */
+.navbar-div {
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.menu-button-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.bracket {
+  width: 6px;
+  height: 20px;
+  position: relative;
+}
+
+.bracket.is-r {
+  transform: scaleX(-1);
+}
+
+.menu-txt-open,
+.menu-txt-close {
+  margin: 0 0.5rem;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+
+.nav-menu {
+  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+
+}
+
+.nav-bullet {
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.navlink {
+  position: relative;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.navlink:hover .nav-bullet {
+  opacity: 1;
+}
+
+.hover-bg-div {
+  z-index: -1;
+}
+
+.social-link {
+  transition: all 0.3s ease;
+}
+
+.play-icon {
+  transition: transform 0.3s ease;
+}
+
+.nav-reel-div:hover .play-icon {
+  transform: scale(1.1);
+}
+
+/* Asegúrate de que tienes esto para los elementos de navegación secundaria */
+.nav-sec-nav {
+  margin-left: 2.25rem;
+}
+
+.sec-navlink {
+  position: relative;
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.social-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Animación para la aparición del menú desde la derecha */
+@media (min-width: 768px) {
+  .nav-menu {
+    transform: translateX(0);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s ease;
+  }
+
+  .nav-menu.invisible {
+    transform: translateX(100%);
+  }
+}
+
+/* Estilos específicos para el menú corporativo */
+.corporate-menu .navlink:hover {
+  color: #93c5fd;
+  /* blue-200 */
+}
+
+.corporate-menu .sec-navlink:hover {
+  color: #93c5fd;
+  /* blue-200 */
+}
+
+.corporate-menu .hover-bg-div {
+  background-color: rgba(30, 58, 138, 0.3);
+  /* blue-900 with opacity */
+}
+
+/* Estilos específicos para el menú artístico */
+.artistic-menu .navlink:hover {
+  color: #d8b4fe;
+  /* purple-200 */
+}
+
+.artistic-menu .sec-navlink:hover {
+  color: #d8b4fe;
+  /* purple-200 */
+}
+
+.artistic-menu .hover-bg-div {
+  background-color: rgba(88, 28, 135, 0.3);
+  /* purple-900 with opacity */
+}
+
+/* Animaciones para los menús laterales */
+@media (min-width: 768px) {
+  .corporate-menu {
+    transform: translateX(0);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s ease;
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .corporate-menu.invisible {
+    transform: translateX(-100%);
+  }
+
+  .artistic-menu {
+    transform: translateX(0);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s ease;
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .artistic-menu.invisible {
+    transform: translateX(100%);
+  }
+}
+
+/* Estilos para los botones de menú */
+#menu-toggle-corporate .bracket,
+#menu-toggle-corporate .menu-txt-open,
+#menu-toggle-corporate .menu-txt-close {
+  color: #60a5fa;
+  /* blue-400 */
+}
+
+#menu-toggle-artistic .bracket,
+#menu-toggle-artistic .menu-txt-open,
+#menu-toggle-artistic .menu-txt-close {
+  color: #c084fc;
+  /* purple-400 */
+}
+
+/* Mejoras de estilo para la navegación en dispositivos pequeños */
+@media (max-width: 767px) {
+
+  .corporate-menu,
+  .artistic-menu {
+    width: 100%;
+  }
+
+  .nav-links {
+    padding-top: 2rem;
+  }
+
+  .navlink {
+    font-size: 1.5rem;
+  }
+}
