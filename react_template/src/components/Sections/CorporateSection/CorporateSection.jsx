@@ -3,6 +3,7 @@ import { IdentityContext } from '../../../contexts/IdentityContext';
 import { ColorSchemeContext } from '../../../contexts/ColorSchemeContext';
 import LeadershipTimeline from './LeadershipTimeline';
 import ConsultancyPortal from './ConsultancyPortal';
+import VerticalNavbar from '../../Navigation/VerticalNavbar';
 import { IDENTITIES } from '../../../utils/constants';
 
 const CorporateSection = () => {
@@ -10,6 +11,13 @@ const CorporateSection = () => {
   const { colors } = useContext(ColorSchemeContext);
   
   const isCorporateActive = isIdentityActive(IDENTITIES.CORPORATE);
+  
+  const corporateNavItems = [
+    { name: 'Professional Background', id: 'background', isActive: true },
+    { name: 'Areas of Expertise', id: 'expertise', isActive: false },
+    { name: 'Leadership Timeline', id: 'timeline', isActive: false },
+    { name: 'Consultancy Portal', id: 'consultancy', isActive: false },
+  ];
 
   return (
     <section 
@@ -38,46 +46,65 @@ const CorporateSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
-          <div className="bg-white p-8 rounded-lg shadow-lg">
-            <h3 className="text-2xl font-semibold mb-4" style={{ color: colors.primary }}>
-              Professional Background
-            </h3>
-            <p className="mb-4" style={{ color: colors.text }}>
-              As the CEO of Aston School Barcelona, Josepe has established a distinguished 
-              reputation in both the corporate world and academic sphere. With previous 
-              leadership roles at BBDO and DDB, his approach combines data-driven strategy 
-              with creative excellence.
-            </p>
-            <p style={{ color: colors.text }}>
-              Currently serving as a Professor at IED Barcelona while leading Aston School's 
-              growth since 2017, Josepe brings a wealth of experience in digital transformation, 
-              brand strategy, and educational innovation.
-            </p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Vertical Navbar - Takes 2 columns */}
+          <div className="lg:col-span-2">
+            <VerticalNavbar 
+              items={corporateNavItems} 
+              identity={IDENTITIES.CORPORATE}
+              sectionId="corporate"
+            />
           </div>
           
-          <div className="bg-white p-8 rounded-lg shadow-lg">
-            <h3 className="text-2xl font-semibold mb-4" style={{ color: colors.primary }}>
-              Areas of Expertise
-            </h3>
-            <ul className="space-y-2">
-              {['Digital Marketing Strategy', 'Corporate Leadership', 'Educational Innovation', 
-                'International Business Development', 'Brand Transformation'].map((item, index) => (
-                <li 
-                  key={index} 
-                  className="flex items-center"
-                  style={{ color: colors.text }}
-                >
-                  <span className="mr-2 text-blue-500">✓</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
+          {/* Main Content - Takes 10 columns */}
+          <div className="lg:col-span-10">
+            <div id="corporate-background" className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+              <div className="bg-white p-8 rounded-lg shadow-lg">
+                <h3 className="text-2xl font-semibold mb-4" style={{ color: colors.primary }}>
+                  Professional Background
+                </h3>
+                <p className="mb-4" style={{ color: colors.text }}>
+                  As the CEO of Aston School Barcelona, Josepe has established a distinguished 
+                  reputation in both the corporate world and academic sphere. With previous 
+                  leadership roles at BBDO and DDB, his approach combines data-driven strategy 
+                  with creative excellence.
+                </p>
+                <p style={{ color: colors.text }}>
+                  Currently serving as a Professor at IED Barcelona while leading Aston School's 
+                  growth since 2017, Josepe brings a wealth of experience in digital transformation, 
+                  brand strategy, and educational innovation.
+                </p>
+              </div>
+              
+              <div id="corporate-expertise" className="bg-white p-8 rounded-lg shadow-lg">
+                <h3 className="text-2xl font-semibold mb-4" style={{ color: colors.primary }}>
+                  Areas of Expertise
+                </h3>
+                <ul className="space-y-2">
+                  {['Digital Marketing Strategy', 'Corporate Leadership', 'Educational Innovation', 
+                    'International Business Development', 'Brand Transformation'].map((item, index) => (
+                    <li 
+                      key={index} 
+                      className="flex items-center"
+                      style={{ color: colors.text }}
+                    >
+                      <span className="mr-2 text-blue-500">✓</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div id="corporate-timeline" className="mb-20">
+              <LeadershipTimeline />
+            </div>
+            
+            <div id="corporate-consultancy">
+              <ConsultancyPortal />
+            </div>
           </div>
         </div>
-
-        <LeadershipTimeline />
-        <ConsultancyPortal />
       </div>
     </section>
   );
